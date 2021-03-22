@@ -16,15 +16,18 @@ const getClientWebpack = (chain: WebpackChain) => {
   const truePublicPath = isDev ? publicPath : `/client${publicPath}`
   getBaseConfig(chain)
   chain.devtool(isDev ? 'cheap-module-source-map' : (shouldUseSourceMap ? 'source-map' : false))
+  //入口文件不同
   chain.entry(chunkName)
     .add(loadModule('../entry/client-entry'))
     .end()
     .output
     .path(getOutput().clientOutPut)
+    //打包结果文件不同
     .filename(useHash ? 'static/js/[name].[contenthash:8].js' : 'static/js/[name].js')
     .chunkFilename(useHash ? 'static/js/[name].[contenthash:8].chunk.js' : 'static/js/[name].chunk.js')
     .publicPath(truePublicPath)
     .end()
+    //客户端需要优化文件大小splitchunk
   chain.optimization
     .runtimeChunk(true)
     .splitChunks({
@@ -43,6 +46,7 @@ const getClientWebpack = (chain: WebpackChain) => {
     })
     .when(!isDev, optimization => {
       optimization.minimizer('terser')
+      // 最小化js 混淆
         .use(loadModule('terser-webpack-plugin'), [{
           terserOptions: {
             parse: {

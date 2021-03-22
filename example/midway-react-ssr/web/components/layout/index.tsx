@@ -6,6 +6,7 @@ import styles from './index.less'
 
 const Layout = (props: LayoutProps) => {
   // 注：Layout 只会在服务端被渲染，不要在此运行客户端有关逻辑
+  // 所有自由服务端才会window.__USE_SSR__=true
   const { state } = useContext(window.STORE_CONTEXT)
   const { injectCss, injectScript } = props.staticList!
   return (

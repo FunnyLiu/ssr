@@ -9,7 +9,7 @@ import { getCwd, isFaaS } from 'ssr-server-utils'
 import { Argv } from 'ssr-types'
 
 const cwd = getCwd()
-
+//serverless部署
 const deploy = async (argv: Argv) => {
   if (!isFaaS()) {
     console.log('检测到当前为首次发布，根目录下缺少 f.yml 文件，自动创建默认 yml 文件模版')

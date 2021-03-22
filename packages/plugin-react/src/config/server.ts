@@ -11,6 +11,7 @@ const getServerWebpack = (chain: WebpackChain) => {
   const { isDev, cwd, getOutput, chainServerConfig, whiteList, chunkName } = config
   getBaseConfig(chain)
   chain.devtool(isDev ? 'eval-source-map' : false)
+  // 服务端打包特殊设置，node，从而在node端引入前端组件模块等等。
   chain.target('node')
   chain.entry(chunkName)
     .add(loadModule('../entry/server-entry'))
@@ -24,6 +25,7 @@ const getServerWebpack = (chain: WebpackChain) => {
   if (isDev) {
     modulesDir.push(getLocalNodeModules())
   }
+  // 排除后端node_modules的打包
   chain.externals(nodeExternals({
     whitelist: [/\.(css|less|sass|scss)$/, /ssr-temporary-routes/, /^antd.*?css/].concat(whiteList || []),
     // externals Dir contains example/xxx/node_modules ssr/node_modules

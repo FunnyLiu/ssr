@@ -24,7 +24,7 @@ const parseFeRoutes = async () => {
 
   const defaultLayout = `@/components/layout/index.${isVue ? 'vue' : 'tsx'}`
   const defaultApp = '@/components/layout/App.vue'
-
+  //临时路由表是自己根据规约创建的，在node_modules里ssr-temporary-routes
   try {
     await fs.access(join(cwd, './node_modules/ssr-temporary-routes'))
   } catch (error) {

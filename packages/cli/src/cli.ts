@@ -13,12 +13,16 @@ yargs
       message: 'start'
     })
     process.env.NODE_ENV = 'development'
+    // 加载插件
+    // 客户端插件和服务端插件位于应用工程的plugin.js内
     const plugin = loadPlugin()
     await parseFeRoutes()
     spinnerProcess.send({
       message: 'stop'
     })
+    //基于客户端引用的不同插件，进行start命令，基本前端都是webpack-dev-server来完成
     await plugin.clientPlugin?.start?.(argv)
+    //服务端则是各自的cli或者npx nest这种exec的方式
     await plugin.serverPlugin?.start?.(argv)
   })
   .command('build', 'Build server and client files', {}, async (argv: Argv) => {

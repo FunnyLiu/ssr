@@ -6,7 +6,7 @@ import { ISSRContext, UserConfig } from 'ssr-types'
 const mergeStream = require('merge-stream')
 const cwd = getCwd()
 const defaultConfig = loadConfig()
-
+//渲染html流的关键逻辑
 async function render<T=string> (ctx: ISSRContext, options?: UserConfig): Promise<T> {
   const config = Object.assign({}, defaultConfig, options ?? {})
   const { isDev, chunkName, stream } = config

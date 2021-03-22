@@ -13,6 +13,7 @@ const feRoutes: FeRouteItem[] = require('ssr-temporary-routes/route')
 
 const clientRender = async (): Promise<void> => {
   // 客户端渲染||hydrate
+  //window.__USE_SSR__只有在服务端渲染的layout组件中会赋值
   const routes = await preloadComponent(feRoutes)
   ReactDOM[window.__USE_SSR__ ? 'hydrate' : 'render'](
     <BrowserRouter>
