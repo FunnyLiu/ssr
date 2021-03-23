@@ -15,6 +15,7 @@ const clientRender = async (): Promise<void> => {
   // 客户端渲染||hydrate
   //window.__USE_SSR__只有在服务端渲染的layout组件中会赋值
   const routes = await preloadComponent(feRoutes)
+  // 如果是服务端渲染，就用reactdom.hydrate来注水，如果是客户端就完整渲染
   ReactDOM[window.__USE_SSR__ ? 'hydrate' : 'render'](
     <BrowserRouter>
       <App>

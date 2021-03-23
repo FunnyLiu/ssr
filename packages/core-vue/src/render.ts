@@ -6,6 +6,7 @@ import { ISSRContext, UserConfig } from 'ssr-types'
 const mergeStream = require('merge-stream')
 const cwd = getCwd()
 const defaultConfig = loadConfig()
+// vue ssr专用渲染组件为html的api
 const { renderToStream, renderToString } = createRenderer()
 
 async function render<T=string> (ctx: ISSRContext, options?: UserConfig): Promise<T> {
