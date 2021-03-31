@@ -54,6 +54,8 @@ const serverRender = async (ctx: ISSRContext, config: IConfig): Promise<React.Re
   window.STORE_CONTEXT = Context // 为每一个新的请求都创建一遍 context 并且覆盖 window 上的属性，使得无需通过props层层传递读取
 
   return (
+    //服务器端渲染是一种无状态的渲染。基本的思路是，将<BrowserRouter>替换为无状态的<StaticRouter>
+    //
     <StaticRouter>
       <Context.Provider value={{ state: fetchData }}>
         <Layout ctx={ctx} config={config} staticList={staticList}>
